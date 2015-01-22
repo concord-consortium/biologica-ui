@@ -1,0 +1,58 @@
+
+Bodies
+  cols: azure alive, bronze alive, ruby alive, emerald alive, amethyst alive, gold alive, albino alive
+  row: [4 legs, plain tail]
+  row: [4 legs, arrow tail]
+  row: [4 legs, fancy tail]
+  row: [0 legs, plain tail]
+  row: [0 legs, arrow tail]
+  row: [0 legs, fancy tail]
+  row: [2 legs, plain tail]
+  row: [2 legs, arrow tail]
+  row: [2 legs, fancy tail]
+
+Dead
+  cols: azure dead, bronze dead, ruby dead, emerald dead, amethyst dead, gold dead, albino dead
+  row: all
+
+Fire
+  cols: normal fire, blue fire
+  row: 4 legs
+  row: 0 legs
+  row: 2 legs
+
+Heads
+  cols: azure alive, bronze alive, ruby alive, emerald alive, amethyst alive, gold alive, albino alive
+  row: [4 legs, no horns]
+  row: [4 legs, 2 horns]
+  row: [4 legs, unicorn]
+  row: [0 legs, no horns]
+  row: [0 legs, 2 horns]
+  row: [0 legs, unicorn]
+  row: [2 legs, no horns]
+  row: [2 legs, 2 horns]
+  row: [2 legs, unicorn]
+
+Plates
+  cols: azure alive, bronze alive, ruby alive, emerald alive, amethyst alive, gold alive, albino alive
+  row: [4 legs, big plates]
+  row: [4 legs, little plates]
+  row: [0 legs, big plates]
+  row: [0 legs, little plates]
+  row: [2 legs, big plates]
+  row: [2 legs, little plates]
+
+Scales
+  cols: all
+  row: 4 legs
+  row: 0 legs
+  row: 2 legs
+
+Wings
+  cols: azure alive, bronze alive, ruby alive, emerald alive, amethyst alive, gold alive, albino alive
+  row: [4 legs, single wings]
+  row: [4 legs, double wings]
+  row: [0 legs, single wings]
+  row: [0 legs, double wings]
+  row: [2 legs, single wings]
+  row: [2 legs, double wings]
