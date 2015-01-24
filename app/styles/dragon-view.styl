@@ -1,0 +1,104 @@
+@import 'mixins.styl'
+
+colortable(parents, elem, position)
+  for $parent in parents
+    pct = 0%
+    &.{$parent}
+      for $color in 'blue' 'brown' 'red' 'green' 'purple' 'yellow' 'albino'
+        &.{$color}
+          {elem}
+            display: block
+            top: position
+            left: pct
+        pct -= 100
+    position -= 100
+
+.dragon-view
+  position: relative
+  height: 141px
+  width: 188px
+  overflow: hidden
+
+  img
+    position: absolute
+    display: none
+    top: 0%
+    left: 0%
+    &.body
+      z-index: 2
+    &.dead
+      z-index: 1
+    &.fire
+      z-index: 6
+    &.head
+      z-index: 5
+    &.plates
+      z-index: 1
+    &.scales
+      z-index: 4
+    &.wings
+      z-index: 3
+
+  &.alive
+    &.four-legs
+      colortable('plain-tail' 'arrow-tail' 'fancy-tail', 'img.body', 0%)
+      colortable('no-horns' 'horns' 'unicorn', 'img.head', 0%)
+      colortable('big-plates' 'little-plates', 'img.plates', 0%)
+      colortable('wings' 'double-wings', 'img.wings', 0%)
+      &.fire
+        img.fire
+          display: block
+          top: 0%
+          left: 0%
+      &.blue-fire
+        img.fire
+          display: block
+          top: 0%
+          left: -100%
+      &.scales
+        img.scales
+          display: block
+          top: 0%
+          left: 0%
+    &.no-legs
+      colortable('plain-tail' 'arrow-tail' 'fancy-tail', 'img.body', -300%)
+      colortable('no-horns' 'horns' 'unicorn', 'img.head', -300%)
+      colortable('big-plates' 'little-plates', 'img.plates', -200%)
+      colortable('wings' 'double-wings', 'img.wings', -200%)
+      &.fire
+        img.fire
+          display: block
+          top: -100%
+          left: 0%
+      &.blue-fire
+        img.fire
+          display: block
+          top: -100%
+          left: -100%
+      &.scales
+        img.scales
+          display: block
+          top: -100%
+          left: 0%
+    &.two-legs
+      colortable('plain-tail' 'arrow-tail' 'fancy-tail', 'img.body', -600%)
+      colortable('no-horns' 'horns' 'unicorn', 'img.head', -600%)
+      colortable('big-plates' 'little-plates', 'img.plates', -400%)
+      colortable('wings' 'double-wings', 'img.wings', -400%)
+      &.fire
+        img.fire
+          display: block
+          top: -200%
+          left: 0%
+      &.blue-fire
+        img.fire
+          display: block
+          top: -200%
+          left: -100%
+      &.scales
+        img.scales
+          display: block
+          top: -200%
+          left: 0%
+
+  colortable(('dead'), 'img.dead', 0%)

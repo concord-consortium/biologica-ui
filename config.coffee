@@ -19,7 +19,7 @@ exports.config =
       path.replace(/^app\//, '')
 
   conventions:
-    assets: /examples(\/|\\)/
+    assets: /examples(\/|\\)|^app\/assets(\/|\\)/
 
   plugins:
     afterBrunch: [
