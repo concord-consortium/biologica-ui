@@ -1,11 +1,19 @@
+Events = require 'events'
+EventTypes = require 'event-types'
+
 module.exports = class DragonView
   constructor: (@dragon, domId)->
+    @_addListeners(@dragon)
     @div = $(domId)[0]
     @_injectHtml()
     @_updateClasses()
 
   setDragon: (@dragon)->
     @_updateClasses()
+
+  _addListeners: (dragon)->
+    Events.addEventListener EventTypes.DRAGON.ALLELES_CHANGED, (evt)=>
+      @_updateClasses() if evt.detail.dragon is @dragon
 
   _updateClasses: ->
     @div.setAttribute('class', '')

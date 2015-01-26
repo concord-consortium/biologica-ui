@@ -9,28 +9,31 @@
     <script>
       $(document).ready(function() {
         var DragonView = require('views/dragon-view');
+        var DragonChromosomePulldownView = require('views/dragon-chromosome-pulldown-view');
         var org = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon);
         var view = new DragonView(org, '#example-dragon');
+        var chromoView = new DragonChromosomePulldownView(org, '#chromosome-pulldowns');
 
-        $('#new-dragon').click(function() {
-          var org = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon);
-          view.setDragon(org);
-        });
+        window.org = org;
       });
     </script>
     <style type="text/css">
       #new-dragon {
         margin-top: 5px;
       }
+      #phenotype {
+        float: left;
+      }
+      #chromosome-pulldowns {
+        float: left;
+      }
     </style>
   </head>
   <body>
-    <div>
-      <div>A dragon:</div>
+    <div id="phenotype">
       <div id='example-dragon'></div>
     </div>
-    <div>
-      <button id="new-dragon">Generate Random Dragon</button>
+    <div id="chromosome-pulldowns">
     </div>
   </body>
 </html>
