@@ -13,29 +13,21 @@
             DragonChromosomePulldownView = require('views/dragon-chromosome-pulldown-view');
 
         Helpers.disableAlleles(BioLogica.Species.Dragon, ['HU','wd','ta','fb','aw']);
-        var org = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S,a:h,b:h,a:w,b:W,a:L,b:l,a:t,b:t,a:F,b:f,a:a,b:a,a:B,b:B', BioLogica.FEMALE),
-            view = new DragonView(org, '#example-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
-            chromoView = new DragonChromosomePulldownView(org, '#chromosome-pulldowns', {hiddenGenes: ['scales','plates']});
+        var femaleDragon = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S,a:h,b:h,a:w,b:W,a:L,b:l,a:t,b:t,a:F,b:f,a:a,b:a,a:B,b:B', BioLogica.FEMALE),
+            maleDragon   = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S,a:H,b:h,a:W,b:w,a:L,b:l,a:T,b:t,a:f,a:a,a:B', BioLogica.MALE),
+            view = new DragonView(femaleDragon, '#example-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
+            chromoView = new DragonChromosomePulldownView(femaleDragon, '#chromosome-pulldowns', {hiddenGenes: ['scales','plates']});
 
-        if (org.sex == BioLogica.FEMALE) {
-          $('#female-toggle').prop('checked', true);
-        } else {
-          $('#male-toggle').prop('checked', true);
-        }
+        $('#female-toggle').prop('checked', true);
 
         $('input[name=sex]').click(function() {
-          var sex = $(this).val(),
-              changed = false;
-          if (sex == 'male' && org.sex != BioLogica.MALE) {
-            org = BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, org.getAlleleString(), BioLogica.MALE);
-            changed = true;
-          } else if (sex == 'female' && org.sex != BioLogica.FEMALE) {
-            org = BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, org.getAlleleString(), BioLogica.FEMALE);
-            changed = true;
-          }
-          if (changed) {
-            view.setDragon(org);
-            chromoView.setDragon(org);
+          var sex = $(this).val();
+          if (sex == 'male' && view.dragon.sex != BioLogica.MALE) {
+            view.setDragon(maleDragon);
+            chromoView.setDragon(maleDragon);
+          } else if (sex == 'female' && view.dragon.sex != BioLogica.FEMALE) {
+            view.setDragon(femaleDragon);
+            chromoView.setDragon(femaleDragon);
           }
         });
 
