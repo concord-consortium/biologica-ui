@@ -10,6 +10,10 @@ module.exports = class DragonChromosomePulldownView
 
     @_injectHtml()
 
+  setDragon: (@dragon) ->
+    @div.innerHTML = ""
+    @_injectHtml()
+
   _injectHtml: ->
     for chromo in @species.chromosomeNames
       genes = @species.chromosomeGeneMap[chromo].map (allele)=> @dragon.genetics.geneForAllele(allele)
@@ -43,6 +47,7 @@ module.exports = class DragonChromosomePulldownView
         sel = document.createElement 'select'
         sel.name = "#{chromoLabel}#{side}-#{gene}"
         sel.classList.add gene
+        sel.classList.add 'hidden' if chromo is 'XY' and side is 'B' and @dragon.sex is BioLogica.MALE
         chromoElem.appendChild sel
         for allele in @species.geneList[gene].alleles
           continue if allele in @hiddenAlleles
@@ -86,18 +91,3 @@ module.exports = class DragonChromosomePulldownView
         return if side is 'A' then 'x' else 'y'
     else
       return side.toLowerCase()
-
-    # <div class='chromosome left'>
-    #   <div class='chromosome-label'>Chromosome: 1</div>
-    #   <img class='chromosome-image' src="images/dragons/chromosomes/1A.png" />
-    #   <select class='horns'>
-    #     <option>H</option>
-    #     <option>h</option>
-    #     <option>HU</option>
-    #   </select>
-    #   <select class='scales'>
-    #     <option>S</option>
-    #     <option>s</option>
-    #   </select>
-    # </div>
-

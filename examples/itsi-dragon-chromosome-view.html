@@ -17,7 +17,28 @@
             view = new DragonView(org, '#example-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
             chromoView = new DragonChromosomePulldownView(org, '#chromosome-pulldowns', {hiddenGenes: ['scales','plates']});
 
-        window.org = org;
+        if (org.sex == BioLogica.FEMALE) {
+          $('#female-toggle').prop('checked', true);
+        } else {
+          $('#male-toggle').prop('checked', true);
+        }
+
+        $('input[name=sex]').click(function() {
+          var sex = $(this).val(),
+              changed = false;
+          if (sex == 'male' && org.sex != BioLogica.MALE) {
+            org = BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, org.getAlleleString(), BioLogica.MALE);
+            changed = true;
+          } else if (sex == 'female' && org.sex != BioLogica.FEMALE) {
+            org = BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, org.getAlleleString(), BioLogica.FEMALE);
+            changed = true;
+          }
+          if (changed) {
+            view.setDragon(org);
+            chromoView.setDragon(org);
+          }
+        });
+
       });
     </script>
     <style type="text/css">
@@ -25,11 +46,19 @@
         margin-top: 5px;
       }
       #phenotype {
-        float: left;
+        position: absolute;
+        top: 5px;
+        left: 5px;
       }
       #chromosome-pulldowns {
-        float: left;
-        margin-left: 20px;
+        position: absolute;
+        top: 5px;
+        left: 215px;
+      }
+      #sex-toggle {
+        position: absolute;
+        top: 215px;
+        left: 5px;
       }
     </style>
   </head>
@@ -37,7 +66,10 @@
     <div id="phenotype">
       <div id='example-dragon'></div>
     </div>
-    <div id="chromosome-pulldowns">
+    <div id="chromosome-pulldowns"></div>
+    <div id="sex-toggle">
+      <input type='radio' name='sex' value='male' id='male-toggle'>Male<br/>
+      <input type='radio' name='sex' value='female' id='female-toggle'>Female<br/>
     </div>
   </body>
 </html>
