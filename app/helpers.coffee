@@ -223,3 +223,9 @@ module.exports =
       for name, method of mixin::
         Mixed::[name] = method
     Mixed
+
+  disableAlleles: (species, alleles) ->
+    for own geneName, gene of species.geneList
+      for allele in alleles
+        if allele in gene.alleles
+          gene.alleles.splice(gene.alleles.indexOf(allele), 1)
