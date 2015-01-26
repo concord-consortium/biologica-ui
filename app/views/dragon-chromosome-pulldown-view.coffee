@@ -2,7 +2,9 @@ Events = require 'events'
 EventTypes = require 'event-types'
 
 module.exports = class DragonChromosomePulldownView
-  constructor: (@dragon, domId)->
+  constructor: (@dragon, domId, {@hiddenGenes, @hiddenAlleles})->
+    @hiddenAlleles ?= []
+    @hiddenGenes ?= []
     @div = $(domId)[0]
     @species = BioLogica.Species.Dragon
 
@@ -37,11 +39,13 @@ module.exports = class DragonChromosomePulldownView
     unless chromo is 'XY' and side is 'B' and @dragon.sex is BioLogica.MALE
       # Allele pulldowns
       for gene in genes
+        continue if gene in @hiddenGenes
         sel = document.createElement 'select'
         sel.name = "#{chromoLabel}#{side}-#{gene}"
         sel.classList.add gene
         chromoElem.appendChild sel
         for allele in @species.geneList[gene].alleles
+          continue if allele in @hiddenAlleles
           opt = document.createElement 'option'
           opt.value = allele
           opt.innerHTML = allele
