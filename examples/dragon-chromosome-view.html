@@ -11,7 +11,7 @@
         var DragonView = require('views/dragon-view');
         var DragonChromosomePulldownView = require('views/dragon-chromosome-pulldown-view');
         var org = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon);
-        var view = new DragonView(org, '#example-dragon');
+        var view = new DragonView(org, '#example-dragon', {});
         var chromoView = new DragonChromosomePulldownView(org, '#chromosome-pulldowns');
 
         window.org = org;

@@ -14,7 +14,7 @@
 
         Helpers.disableAlleles(BioLogica.Species.Dragon, ['HU','wd','ta','fb','aw']);
         var org = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S'),
-            view = new DragonView(org, '#example-dragon'),
+            view = new DragonView(org, '#example-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
             chromoView = new DragonChromosomePulldownView(org, '#chromosome-pulldowns', {hiddenGenes: ['scales','plates']});
 
         window.org = org;
@@ -29,6 +29,7 @@
       }
       #chromosome-pulldowns {
         float: left;
+        margin-left: 20px;
       }
     </style>
   </head>

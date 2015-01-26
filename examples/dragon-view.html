@@ -10,11 +10,20 @@
       $(document).ready(function() {
         var DragonView = require('views/dragon-view');
         var org = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon);
-        var view = new DragonView(org, '#example-dragon');
+        var view = new DragonView(org, '#example-dragon', {});
 
         $('#new-dragon').click(function() {
           var org = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon);
           view.setDragon(org);
+        });
+
+        $('#show-sex').click(function() {
+          view.setSexVisible($(this).prop('checked'));
+          console.log('Sex is visible: ' + $(this).prop('checked'));
+        });
+        $('#show-characteristics').click(function() {
+          view.setCharacteristicsVisible($(this).prop('checked'));
+          console.log('Characteristics are visible: ' + $(this).prop('checked'));
         });
       });
     </script>
@@ -22,15 +31,27 @@
       #new-dragon {
         margin-top: 5px;
       }
+      #dragon {
+        float: left;
+      }
+      #controls {
+        float: left;
+      }
     </style>
   </head>
   <body>
-    <div>
+    <div id='dragon'>
       <div>A dragon:</div>
       <div id='example-dragon'></div>
     </div>
-    <div>
-      <button id="new-dragon">Generate Random Dragon</button>
+    <div id='controls'>
+      <div>
+        <button id="new-dragon">Generate Random Dragon</button>
+      </div>
+      <div>
+        <input type='checkbox' id='show-sex' name='show-sex' checked/><label for='show-sex'>Show Sex</label><br/>
+        <input type='checkbox' id='show-characteristics' name='show-characteristics' /><label for='show-characteristics'>Show Characteristics</label>
+      </div>
     </div>
   </body>
 </html>
