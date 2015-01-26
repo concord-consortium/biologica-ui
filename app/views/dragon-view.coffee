@@ -16,6 +16,7 @@ module.exports = class DragonView
   setDragon: (@dragon)->
     @_updateClasses()
     @_updateCharacteristics()
+    @_updateSexLabel()
 
   setSexVisible: (@showSex) ->
     @_updateVisibility()
@@ -28,6 +29,7 @@ module.exports = class DragonView
       if evt.detail.dragon is @dragon
         @_updateClasses()
         @_updateCharacteristics()
+        @_updateSexLabel()
 
   _updateClasses: ->
     @phenoView.setAttribute('class', '')
@@ -55,6 +57,9 @@ module.exports = class DragonView
 
     @characteristicList.innerHTML = out.join('')
 
+  _updateSexLabel: ->
+    @sexLabel.innerHTML = if @dragon.sex is BioLogica.MALE then "male" else "female"
+
   _injectHtml: ->
     @phenoView = document.createElement 'div'
     @phenoView.classList.add 'dragon-view'
@@ -68,12 +73,13 @@ module.exports = class DragonView
     @sexLabel = document.createElement 'div'
     @sexLabel.classList.add 'sex-label'
     @sexLabel.classList.add 'hidden' unless @showSex
-    @sexLabel.innerHTML = if @dragon.sex is BioLogica.MALE then "male" else "female"
     @div.appendChild @sexLabel
 
     @characteristicList = document.createElement 'div'
     @characteristicList.classList.add 'characteristic-list'
     @characteristicList.classList.add 'hidden' unless @showCharacteristics
+    @div.appendChild @characteristicList
+
+    @_updateSexLabel()
     @_updateCharacteristics()
 
-    @div.appendChild @characteristicList
