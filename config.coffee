@@ -8,11 +8,17 @@ exports.config =
     javascripts:
       joinTo:
         'js/app.js': /^app/
-        'js/vendor.js': /^(bower_components)/
+        'js/vendor.js': /^(bower_components|vendor)/
+      order:
+        before: [
+          'vendor/js/raphael.js',
+          'vendor/js/burst-core.js'
+        ]
 
     stylesheets:
       joinTo:
-        'css/app.css' : /^(app|vendor)/
+        'css/app.css' : /^(app)/
+        'css/vendor.css' : /^(bower_components|vendor)/
 
   modules:
     nameCleaner: (path) ->

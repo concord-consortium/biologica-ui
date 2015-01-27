@@ -39,3 +39,5 @@ module.exports = class Events
     console.log "Shimming TouchEvent..."
     window.TouchEvent = class TouchEvent
 )()
+
+(-> window.Events = Events)()

@@ -224,6 +224,11 @@ module.exports =
         Mixed::[name] = method
     Mixed
 
+  defaults: (opts, defaults) ->
+    for own k,v of defaults
+      opts[k] = v unless opts[k]?
+    return opts
+
   disableAlleles: (species, alleles) ->
     for own geneName, gene of species.geneList
       for allele in alleles
