@@ -16,6 +16,12 @@
   "overrides": {
     "jquery": {
       "main": "dist/jquery.js"
+    },
+    "jquery-ui": {
+      "main": [
+        "jquery-ui.js",
+        "themes/smoothness/jquery-ui.css"
+      ]
     }
   },
   "ignore": [
