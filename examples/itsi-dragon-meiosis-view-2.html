@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <title>ITSI - Dragon Meiosis</title>
+    <script src="js/vendor.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      $(document).ready(function() {
+        var Helpers = require('helpers'),
+            DragonView = require('views/dragon-view'),
+            DragonMeiosisView = require('views/dragon-meiosis-view'),
+            MeiosisSupport = require('models/meiosis-support');
+
+        // Helpers.disableAlleles(BioLogica.Species.Dragon, ['HU','wd','ta','fb','aw']);
+        var femaleDragon = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S,b:S,a:h,b:H,a:w,b:W,a:l,b:L,a:t,b:t,a:F,b:f,a:a,b:a,a:B,b:b', BioLogica.FEMALE),
+            maleDragon   = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S,a:H,b:h,a:w,b:w,a:l,b:l,a:t,b:t,a:F,a:a,a:B', BioLogica.MALE),
+            motherView = new DragonView(femaleDragon, '#mother-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
+            fatherView = new DragonView(maleDragon,   '#father-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
+            offspringView = new DragonView(null,   '#offspring-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
+            motherMeiosisView = new DragonMeiosisView(femaleDragon, '#mother-meiosis', {mode: 'parent', meiosisOwner: 'mother'}),
+            fatherMeiosisView = new DragonMeiosisView(maleDragon,   '#father-meiosis', {mode: 'parent', meiosisOwner: 'father'}),
+            offspringMeiosisView = new DragonMeiosisView(null, '#offspring-meiosis', {mode: 'offspring', meiosisOwner: 'offspring'});
+
+            Events.addEventListener(MeiosisSupport.EVENTS.OFFSPRING_CREATED, function(evt) {
+              offspringView.setDragon(evt.detail.offspring);
+            });
+      });
+    </script>
+    <style type="text/css">
+      .meiosis-parent {
+        display: inline-block;
+        width: 320px;
+        height: 320px;
+      }
+
+      .dragon-view-parent, .dragon-view {
+        margin: auto;
+      }
+
+      .phenotype-with-label {
+        display: inline-block;
+        width: 320px;
+        margin-bottom: 10px;
+        vertical-align: top;
+      }
+
+      .phenotype-with-label > div {
+        width: 190px;
+      }
+
+      .phenotype-label {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .meiosis-row {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="phenotypes">
+      <div id="mother" class="phenotype-with-label">
+        <div class="phenotype-label">Mother</div>
+        <div id='mother-dragon'></div>
+      </div>
+      <div id="offspring" class="phenotype-with-label">
+        <div class="phenotype-label">Offspring</div>
+        <div id='offspring-dragon'></div>
+      </div>
+      <div id="father" class="phenotype-with-label">
+        <div class="phenotype-label">Father</div>
+        <div id='father-dragon'></div>
+      </div>
+    </div>
+    <div id="meiosis-row">
+      <div id="mother-meiosis" class="meiosis-parent">mother meiosis</div>
+      <div id="offspring-meiosis" class="meiosis-parent">offspring meiosis</div>
+      <div id="father-meiosis" class="meiosis-parent">father meiosis</div>
+    </div>
+  </body>
+</html>
