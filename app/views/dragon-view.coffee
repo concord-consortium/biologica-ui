@@ -7,7 +7,7 @@ module.exports = class DragonView
     @showCharacteristics ?= false
     @visibleTraits ?= []
 
-    @_addListeners(@dragon)
+    @_addListeners()
     @div = $(domId)[0]
     @div.classList.add 'dragon-view-parent'
     @_injectHtml()
@@ -24,7 +24,7 @@ module.exports = class DragonView
   setCharacteristicsVisible: (@showCharacteristics) ->
     @_updateVisibility()
 
-  _addListeners: (dragon)->
+  _addListeners: ->
     Events.addEventListener EventTypes.DRAGON.ALLELES_CHANGED, (evt)=>
       if evt.detail.dragon is @dragon
         @_updateClasses()
@@ -34,22 +34,26 @@ module.exports = class DragonView
   _updateClasses: ->
     @phenoView.setAttribute('class', '')
     @phenoView.classList.add 'dragon-view'
+    if not @dragon?
+      @phenoView.classList.add 'no-dragon'
+      return
     for characteristic in @dragon.getAllCharacteristics()
       characteristic = characteristic.toLowerCase().replace(' ', '-')
       @phenoView.classList.add characteristic
 
   _updateVisibility: ->
-    if @showSex
+    if @dragon? and @showSex
       @sexLabel.classList.remove('hidden') if @sexLabel.classList.contains('hidden')
     else
       @sexLabel.classList.add 'hidden'
 
-    if @showCharacteristics
+    if @dragon? and @showCharacteristics
       @characteristicList.classList.remove('hidden') if @characteristicList.classList.contains('hidden')
     else
       @characteristicList.classList.add 'hidden'
 
   _updateCharacteristics: ->
+    return unless @dragon?
     out = []
     for own trait, characteristic of @dragon.phenotype.characteristics
       continue if @visibleTraits.length > 0 and trait not in @visibleTraits
@@ -58,6 +62,7 @@ module.exports = class DragonView
     @characteristicList.innerHTML = out.join('')
 
   _updateSexLabel: ->
+    return unless @dragon?
     @sexLabel.innerHTML = if @dragon.sex is BioLogica.MALE then "male" else "female"
 
   _injectHtml: ->
