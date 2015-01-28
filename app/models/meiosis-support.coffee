@@ -1,8 +1,4 @@
 module.exports = class MeiosisSupport
-  @EVENTS:
-    GAMETE_SELECTED: 'meiosis.gamete-selected'
-    RESET: 'meiosis.retry'
-    OFFSPRING_CREATED: 'meiosis.offspring-created'
 
   @processAlleleString: (alleleString, species=BioLogica.Species.Dragon) ->
     return [] unless alleleString?

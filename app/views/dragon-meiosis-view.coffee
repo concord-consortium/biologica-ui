@@ -1,5 +1,6 @@
 Helpers = require('helpers')
 MeiosisSupport = require('models/meiosis-support')
+EventTypes = require('event-types')
 
 module.exports = class DragonMeiosisView
   @_defaults:
@@ -25,11 +26,11 @@ module.exports = class DragonMeiosisView
     @opts.species.alleleLabelMap[allele]
 
   _setupListeners: ->
-    Events.addEventListener MeiosisSupport.EVENTS.RESET, (evt) =>
+    Events.addEventListener EventTypes.MEIOSIS.RESET, (evt) =>
       if evt.detail.owner is @opts.meiosisOwner and evt.detail.mode is @opts.mode
         @_reset()
-        Events.dispatchEvent MeiosisSupport.EVENTS.GAMETE_SELECTED, {owner: @opts.meiosisOwner, gamete: null}
-    Events.addEventListener MeiosisSupport.EVENTS.GAMETE_SELECTED, (evt) =>
+        Events.dispatchEvent EventTypes.MEIOSIS.GAMETE_SELECTED, {owner: @opts.meiosisOwner, gamete: null}
+    Events.addEventListener EventTypes.MEIOSIS.GAMETE_SELECTED, (evt) =>
       if @opts.mode is 'offspring'
         if evt.detail.owner is 'mother'
           @motherData = evt.detail.gamete
@@ -54,7 +55,7 @@ module.exports = class DragonMeiosisView
         @jsonData = @fatherData
       else
         @jsonData = null
-      Events.dispatchEvent MeiosisSupport.EVENTS.OFFSPRING_CREATED, {offspring: null}
+      Events.dispatchEvent EventTypes.MEIOSIS.OFFSPRING_CREATED, {offspring: null}
     else if @dragon?
       @jsonData = MeiosisSupport.allelesToJSON(@dragon.getAlleleString())
 
@@ -119,10 +120,10 @@ module.exports = class DragonMeiosisView
       alleles = MeiosisSupport.JSONToAlleles @motherData, @fatherData
       sex = MeiosisSupport.getOffspringSex @fatherData
       dragon = BioLogica.Organism.createOrganism @opts.species, alleles, sex
-      Events.dispatchEvent MeiosisSupport.EVENTS.OFFSPRING_CREATED, {offspring: dragon}
+      Events.dispatchEvent EventTypes.MEIOSIS.OFFSPRING_CREATED, {offspring: dragon}
 
   _gameteSelected: (data)->
-    Events.dispatchEvent MeiosisSupport.EVENTS.GAMETE_SELECTED, {owner: @opts.meiosisOwner, gamete: data}
+    Events.dispatchEvent EventTypes.MEIOSIS.GAMETE_SELECTED, {owner: @opts.meiosisOwner, gamete: data}
 
   _playButtonPressed: ->
     undefined
