@@ -4,5 +4,5 @@ describe 'Basics', ->
 
     expect(org.sex).toEqual BioLogica.FEMALE
     expect(org.species.name).toEqual 'Dragon'
-    expect(org.getCharacteristic('horns')).toEqual 'Horns'
+    expect(org.getCharacteristic('horns')).toEqual 'No Horns'
 
