@@ -29,9 +29,9 @@ exports.config =
 
   plugins:
     afterBrunch: [
-      'echo -n "Cleaning coffee files..." && find public/ -type f -name "*.coffee" -delete'
-      'echo -n "Building examples..." && coffee --compile --output public examples/'
-      'echo -n "Cleaning ui assets..." && rm -rf public/ui'
+      'echo "Cleaning coffee files..." && find public/ -type f -name "*.coffee" -delete' + '; ' +
+      'echo "Building examples..." && coffee --compile --output public examples/' + '; ' +
+      'echo "Cleaning ui assets..." && rm -rf public/ui' + '; ' +
       'echo "Done."'
     ]
     stylus:
@@ -45,8 +45,8 @@ exports.config =
     production:
       plugins:
         afterBrunch: [
-          'echo -n "Cleaning coffee files..." && find public/ -type f -name "*.coffee" -delete'
-          'echo -n "Building examples and digesting..." && coffee --compile --output public examples/ && ./bin/digest'
-          'echo -n "Cleaning ui assets..." && rm -rf public/ui'
+          'echo "Cleaning coffee files..." && find public/ -type f -name "*.coffee" -delete' + '; ' +
+          'echo "Building examples and digesting..." && coffee --compile --output public examples/ && ./bin/digest' + '; ' +
+          'echo "Cleaning ui assets..." && rm -rf public/ui' + '; ' +
           'echo "Done."'
         ]
