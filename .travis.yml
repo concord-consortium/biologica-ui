@@ -23,9 +23,9 @@ script: node_modules/karma/bin/karma start test/karma.travis.conf.js
 deploy:
 - provider: s3
   access_key_id:
-    secure: X48QoG+ZgSck1n3+VSAR/lzKF65cxPEdbbp8TcKAHaBDfRh5twSowbE0QE8l9yE4UbRSkmtbSCmsGkxsi6+AX4UZ3FkHR9Ke93ZHua1ncdfSOS+BMtfUl7/Q+Yhp8619G6VLGYDFQEmip89pNi+F5aFud9X9+qObWFJC1haVXB8=
+    secure: e87g5a0gpoz1zMmIMHC9El0m0y1LXLiTETXT8s7aCa5VZwKYofMHOGt2xkc/uoZQo2l4E8AQCzJRlWRIa1DvrtM2B7y6NKBhL8hQvaLcRR+sW2KzFXnn2yDRbDyNlLW2/GHRd2270/gyaJ/iFk/QKQaagm8+j2+ielj9ktZqvuE=
   secret_access_key:
-    secure: USiMwhfwJO2tEbQODWBUqjv5jwEfSFxn6v0KcaPdxNVLCDrXPFvmIBgP7F90lr5ulSMwM2d8deb2EMHkh7fCK2ABK+Qcvabez1VAjIdnKy7/1GROofxeeMBivosj8YEz+X9SJmdw7tJ4hAbkdcdIB0n9kW5uSGUVO0jl39zsknY=
+    secure: Cy/pibLvLHbtmEoDZ1Jor8P26DAaZhnbqe32UtfRTW35HWbVIJVqf9/tHQFEViShsamIhRD3WAXyZH5zv+tUV/Adc17MSuIiQSb3RP+8IwX79/JVK628X4pIAP2daFDmXu/25t0ynvCiag6Vf9/J2R+NhDJ5hqdmSU1imHT1nb0=
   bucket: models-resources
   local-dir: public
   upload-dir: "biologica-ui"
@@ -35,9 +35,9 @@ deploy:
     branch: production
 - provider: s3
   access_key_id:
-    secure: X48QoG+ZgSck1n3+VSAR/lzKF65cxPEdbbp8TcKAHaBDfRh5twSowbE0QE8l9yE4UbRSkmtbSCmsGkxsi6+AX4UZ3FkHR9Ke93ZHua1ncdfSOS+BMtfUl7/Q+Yhp8619G6VLGYDFQEmip89pNi+F5aFud9X9+qObWFJC1haVXB8=
+    secure: e87g5a0gpoz1zMmIMHC9El0m0y1LXLiTETXT8s7aCa5VZwKYofMHOGt2xkc/uoZQo2l4E8AQCzJRlWRIa1DvrtM2B7y6NKBhL8hQvaLcRR+sW2KzFXnn2yDRbDyNlLW2/GHRd2270/gyaJ/iFk/QKQaagm8+j2+ielj9ktZqvuE=
   secret_access_key:
-    secure: USiMwhfwJO2tEbQODWBUqjv5jwEfSFxn6v0KcaPdxNVLCDrXPFvmIBgP7F90lr5ulSMwM2d8deb2EMHkh7fCK2ABK+Qcvabez1VAjIdnKy7/1GROofxeeMBivosj8YEz+X9SJmdw7tJ4hAbkdcdIB0n9kW5uSGUVO0jl39zsknY=
+    secure: Cy/pibLvLHbtmEoDZ1Jor8P26DAaZhnbqe32UtfRTW35HWbVIJVqf9/tHQFEViShsamIhRD3WAXyZH5zv+tUV/Adc17MSuIiQSb3RP+8IwX79/JVK628X4pIAP2daFDmXu/25t0ynvCiag6Vf9/J2R+NhDJ5hqdmSU1imHT1nb0=
   bucket: models-resources
   local-dir: public
   upload-dir: "biologica-ui-dev"
