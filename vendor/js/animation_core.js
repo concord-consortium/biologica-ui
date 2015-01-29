@@ -744,15 +744,9 @@
         this.hide();
       }
 
-      if (this.gene == "Y" && !this.parent.hidden){
-        this.labelLink.show();
-        this.geneText.show();
-        this.geneFrame.show();
-      } else {
-        this.labelLink.hide();
-        this.geneText.hide();
-        this.geneFrame.hide();
-      }
+      this.labelLink.hide();
+      this.geneText.hide();
+      this.geneFrame.hide();
 
       this.SVG_outer.drag(this.dragmove_mouse, this.dragstart_mouse, this.dragstop_mouse);
 
@@ -774,7 +768,7 @@
       },function(){
         if(!this.parent.parent.hidden){
           for(var i=0; i < this.parent.parent.alleleCount; i++){
-            if ((this.parent.hiddenGenes.indexOf(this.parent.parent.alleles[i].gene.toLowerCase()) == -1) && this.parent.parent.alleles[i].gene != "Y") {
+            if ((this.parent.hiddenGenes.indexOf(this.parent.parent.alleles[i].gene.toLowerCase()) == -1)) {
               this.parent.parent.alleles[i].labelLink.hide();
               this.parent.parent.alleles[i].geneText.hide();
               this.parent.parent.alleles[i].geneFrame.hide();
@@ -1098,9 +1092,7 @@
 
     Chromosome.prototype.hide = function(){
       for(var i=0; i < this.alleleCount; i++){
-        if (this.alleles[i].gene != 'Y') {
-      this.alleles[i].hide();
-    }
+        this.alleles[i].hide();
       }
       this.hidden = true;
     };
@@ -1108,11 +1100,6 @@
     Chromosome.prototype.show = function(){
       for(var i=0; i < this.alleleCount; i++){
         this.alleles[i].show();
-    if (this.alleles[i].gene == "Y"){
-      this.alleles[i].labelLink.show();
-      this.alleles[i].geneText.show();
-      this.alleles[i].geneFrame.show();
-    }
       }
       this.hidden = false;
     };
