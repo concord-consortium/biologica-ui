@@ -91,7 +91,11 @@
   }
 
   Timeline.prototype.play = function( frame ){
-    this.frame = frame || (this.frame += this.speed);
+    if (typeof(frame) == 'number') {
+      this.frame = frame;
+    } else {
+      this.frame += this.speed;
+    }
     if( this.loop ){
       if( this.frame > this.end ){ this.frame = this.start; }
       if( this.frame < this.start ){ this.frame = this.end; }
