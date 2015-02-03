@@ -17,6 +17,7 @@ module.exports = class DragonView
     @_updateClasses()
     @_updateCharacteristics()
     @_updateSexLabel()
+    @_updateVisibility()
 
   setSexVisible: (@showSex) ->
     @_updateVisibility()
@@ -87,4 +88,5 @@ module.exports = class DragonView
 
     @_updateSexLabel()
     @_updateCharacteristics()
+    @_updateVisibility()
 
