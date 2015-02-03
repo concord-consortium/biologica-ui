@@ -9,8 +9,8 @@ module.exports = class DragonMeiosisView
     mode: 'offspring'  # 'offspring' or 'parent'
     swapping: 'none'   # 'none' or ... ???
     meiosisOwner: 'offspring'  # 'offspring', 'mother', 'father'
-    width: 320
-    height: 320
+    width: 300
+    height: 300
     jsonDataUrl: undefined
 
   constructor: (@dragon, domId, opts={}) ->
