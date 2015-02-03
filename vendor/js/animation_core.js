@@ -154,7 +154,7 @@
           break;
         case 'offspring':
           membranes[0] = new Membrane({ paper: paper, x: centerX-centerX/2, y: centerY, radius: centerY/2, opacity:maxMembraneOpacity, hidden:false });
-          membranes[1] = new Membrane({ paper: paper, x: centerX+centerX/3, y: centerY, radius: centerY/2, opacity:maxMembraneOpacity, hidden:false, isSperm: true });
+          membranes[1] = new Membrane({ paper: paper, x: centerX+centerX/3, y: centerY+5, radius: centerY/2, opacity:maxMembraneOpacity, hidden:false, isSperm: true });
           break;
       }
 
@@ -611,8 +611,8 @@
 
       if( this.isSperm ){
         this.stretch = 1;
-        var edge_r = this.radius*1.125;
-        shape = paper.ellipse( this.x, this.y, edge_r, this.radius*0.75 );
+        var edge_r = this.radius*1;
+        shape = paper.ellipse( this.x, this.y, edge_r, this.radius*0.65 );
         this.tail = paper.path(
           ' M' + (this.x+edge_r) + ',' + this.y         +
           ' L' + (this.x+edge_r+15) + ',' + (this.y+10) +
@@ -640,7 +640,7 @@
 
     Membrane.prototype.updateSVG = function( x, y, radius ){
       if( this.isSperm ){
-        var edge_r = this.radius*1.125;
+        var edge_r = this.radius*1;
         this.tail.attr({
           path:
             ' M' + (this.x+edge_r*this.stretch) + ',' + this.y         +
@@ -650,7 +650,7 @@
             ' L' + (this.x+edge_r+60*this.stretch) + ',' + (this.y-10),
           opacity: this.opacity
         });
-        this.SVG.attr({ cx:this.x, cy:this.y, rx:edge_r*this.stretch, ry:this.radius*0.75, opacity:this.opacity });
+        this.SVG.attr({ cx:this.x, cy:this.y, rx:edge_r*this.stretch, ry:this.radius*0.65, opacity:this.opacity });
       }else{
         this.SVG.attr({ cx:this.x, cy:this.y, r:this.radius, opacity:this.opacity });
       }
