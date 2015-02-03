@@ -752,34 +752,57 @@
 
       var raphobj = this.SVG_inner;
 
-      this.SVG_outer.hover(function(){
-        if(!this.parent.parent.hidden){
-          for(var i=0; i < this.parent.parent.alleleCount; i++){
-            if(this.parent.hiddenGenes.indexOf(this.parent.parent.alleles[i].gene.toLowerCase()) == -1){
-              if (this.parent.parent.alleles[i].gene !== "") {
-                this.parent.parent.alleles[i].labelLink.show();
-              }
-              this.parent.parent.alleles[i].geneText.show();
-              this.parent.parent.alleles[i].geneFrame.show();
+      var _self = this;
+
+      this.SVG_outer.hover(function() { _self.showAlleles(); },function() { _self.hideAlleles(); });
+
+      this.SVG_outer.click(function() {
+        if (_self.parent.stickyLabels) {
+          _self.parent.stickyLabels = false;
+          _self.hideAlleles();
+        } else {
+          for (var i = 0; i < chromosomes.length; i++) {
+            chromosomes[i].stickyLabels = false;
+            if (chromosomes[i].alleles.length > 0) { 
+              chromosomes[i].alleles[0].hideAlleles();
             }
           }
-          document.body.style.cursor='pointer';
+          _self.parent.stickyLabels = true;
+          _self.showAlleles();
         }
-      },function(){
-        if(!this.parent.parent.hidden){
-          for(var i=0; i < this.parent.parent.alleleCount; i++){
-            if ((this.parent.hiddenGenes.indexOf(this.parent.parent.alleles[i].gene.toLowerCase()) == -1)) {
-              this.parent.parent.alleles[i].labelLink.hide();
-              this.parent.parent.alleles[i].geneText.hide();
-              this.parent.parent.alleles[i].geneFrame.hide();
-            }
-          }
-          document.body.style.cursor='auto';
-        }
+        return false;
       });
 
       return this;
     }
+
+    Allele.prototype.showAlleles = function(){
+      if(!this.parent.hidden){
+        for(var i=0; i < this.parent.alleleCount; i++){
+          if(this.hiddenGenes.indexOf(this.parent.alleles[i].gene.toLowerCase()) == -1){
+            if (this.parent.alleles[i].gene !== "") {
+              this.parent.alleles[i].labelLink.show();
+            }
+            this.parent.alleles[i].geneText.show();
+            this.parent.alleles[i].geneFrame.show();
+          }
+        }
+        document.body.style.cursor='pointer';
+      }
+    };
+
+    Allele.prototype.hideAlleles = function(){
+      if(!this.parent.hidden && !this.parent.stickyLabels){
+        for(var i=0; i < this.parent.alleleCount; i++){
+          if ((this.hiddenGenes.indexOf(this.parent.alleles[i].gene.toLowerCase()) == -1)) {
+            this.parent.alleles[i].labelLink.hide();
+            this.parent.alleles[i].geneText.hide();
+            this.parent.alleles[i].geneFrame.hide();
+          }
+        }
+        document.body.style.cursor='auto';
+      }
+    };
 
     Allele.prototype.hide = function(){
       this.SVG_inner.attr({stroke:"rgba(0,0,0,0)"});
