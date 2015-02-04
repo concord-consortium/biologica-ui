@@ -6,6 +6,7 @@
     "public/css/app.css"
   ],
   "dependencies": {
+     "console-polyfill": ">=0.1.2",
      "pixi.js": ">=1.4.1",
      "jquery-ui": "~1.11.2",
      "jquery-ui-touchpunch": "https://raw.githubusercontent.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.js",
