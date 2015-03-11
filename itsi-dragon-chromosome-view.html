@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <title>Biologica UI - Dragon Phenotype View</title>
+    <script src="js/vendor.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      $(document).ready(function() {
+        var Helpers = require('helpers'),
+            DragonView = require('views/dragon-view'),
+            DragonChromosomePulldownView = require('views/dragon-chromosome-pulldown-view');
+
+        Helpers.disableAlleles(BioLogica.Species.Dragon, ['HU','wd','ta','fb','aw']);
+        var femaleDragon = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S,a:h,b:h,a:w,b:W,a:L,b:l,a:t,b:t,a:F,b:f,a:a,b:a,a:B,b:B', BioLogica.FEMALE),
+            maleDragon   = new BioLogica.Organism.createOrganism(BioLogica.Species.Dragon, 'a:p,b:p,a:S,a:H,b:h,a:W,b:w,a:L,b:l,a:T,b:t,a:f,a:a,a:B', BioLogica.MALE),
+            view = new DragonView(femaleDragon, '#example-dragon', {showCharacteristics: true, visibleTraits: ['color']}),
+            chromoView = new DragonChromosomePulldownView(femaleDragon, '#chromosome-pulldowns', {hiddenGenes: ['scales','plates']});
+
+        $('#female-toggle').prop('checked', true);
+
+        $('input[name=sex]').click(function() {
+          var sex = $(this).val();
+          if (sex == 'male' && view.dragon.sex != BioLogica.MALE) {
+            view.setDragon(maleDragon);
+            chromoView.setDragon(maleDragon);
+          } else if (sex == 'female' && view.dragon.sex != BioLogica.FEMALE) {
+            view.setDragon(femaleDragon);
+            chromoView.setDragon(femaleDragon);
+          }
+        });
+
+      });
+    </script>
+    <style type="text/css">
+      #new-dragon {
+        margin-top: 5px;
+      }
+      #phenotype {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+      }
+      #chromosome-pulldowns {
+        position: absolute;
+        top: 5px;
+        left: 215px;
+      }
+      #sex-toggle {
+        position: absolute;
+        top: 215px;
+        left: 5px;
+        width: 190px;
+      }
+      #sex-toggle hr {
+        border: 0;
+        height: 1px;
+        background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.3), rgba(0,0,0,0.95), rgba(0,0,0,0.3));
+        background-image:    -moz-linear-gradient(left, rgba(0,0,0,0.3), rgba(0,0,0,0.95), rgba(0,0,0,0.3));
+        background-image:     -ms-linear-gradient(left, rgba(0,0,0,0.3), rgba(0,0,0,0.95), rgba(0,0,0,0.3));
+        background-image:      -o-linear-gradient(left, rgba(0,0,0,0.3), rgba(0,0,0,0.95), rgba(0,0,0,0.3));
+      }
+    </style>
+  </head>
+  <body>
+    <div id="phenotype">
+      <div id='example-dragon'></div>
+    </div>
+    <div id="chromosome-pulldowns"></div>
+    <div id="sex-toggle">
+      <hr/>
+      <input type='radio' name='sex' value='male' id='male-toggle'>Male<br/>
+      <input type='radio' name='sex' value='female' id='female-toggle'>Female<br/>
+    </div>
+  </body>
+</html>
